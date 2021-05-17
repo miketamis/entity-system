@@ -8,8 +8,48 @@ interface DecrementCounterAction {
 }
 export type CounterActionTypes = IncrementCounterAction | DecrementCounterAction
 
+export type EntityReducerAction =
+  | {
+      type: 'transcation'
+      payload: {
+        involvedEntities: string[]
+        actions: {
+          payload: any
+          type: string
+        }[]
+      }
+    }
+  | {
+      type: 'addAction'
+      payload: {
+        involvedEntities: string[]
+        action: {
+          payload: any
+          type: string
+        }
+      }
+    } | {
+      type: 'submitTranscation'
+    }
+
+    type Action = any;
+
+
 export interface SystemState {
-  count: {
-    value: number
+  entitySystem: {
+    entities: {
+      [key: string]: {
+        components: { type: string, balanceCheck?: { address: string, min?: number, max?: number}[], actionName?: string }[]
+        inventory?: { [key: string]: number }
+        permissions: { type: string; action: string; key?: string, token?: string, threshold?: number }[],
+        actions?: { [key: string]: { actions: Action[], involvedEntities: string[] }}
+        pausedState?: any
+      }
+    }
+    involvedEntities: string[]
+    actions: Action[]
+    privilegeStack: [string, string][]
   }
 }
+
+

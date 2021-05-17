@@ -1,10 +1,11 @@
 import { combineReducers, createStore } from 'redux'
 import { devToolsEnhancer } from 'redux-devtools-extension'
-import { CounterReducer } from './features/counter'
+import { CounterReducer, EntityReducer } from './features/counter'
 
 /* Create root reducer, containing all features of the application */
 const rootReducer = combineReducers({
-  count: CounterReducer,
+  localTranscation: CounterReducer,
+  entitySystem: EntityReducer,
 })
 
 const store = createStore(

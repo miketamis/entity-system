@@ -1,16 +1,34 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from './actionTypes'
-import { CounterActionTypes } from './types'
+/*
+{
+  type: 'addAction',
+  payload: {
+    involvedEntities: [
+      'ExampleToken',
+      'Alice',
+      'Mike'
+    ],
+    action: {
+      type: 'transfer',
+      payload: {
+        token: 'ExampleToken',
+        toAccount: 'Alice',
+        fromAccount: 'Mike',
+        amount: 10
+      }
+    }
+  }
+}
+*/
 
 const initialState = {
-  value: 0,
+  involvedEntities: [] as string[],
+  actions: [] as any[],
+  privilegeStack: [] as any[],
 }
 
-export default (state = initialState, action: CounterActionTypes) => {
+export default (state = initialState, action: any) => {
   switch (action.type) {
-    case INCREMENT_COUNTER:
-      return { ...state, value: state.value + 1 }
-    case DECREMENT_COUNTER:
-      return { ...state, value: state.value - 1 }
+
     default:
       return state
   }
